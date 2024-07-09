@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vite App</title>
+  <style>
+    img {
+      display: block;
+      margin: 20px auto;
+      view-timeline-name: --reveal;
+      animation-name: show;
+      animation-fill-mode: both;
+      animation-timeline: --reveal;
+      animation-range: entry 25% cover 50%;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    }
+
+    @keyframes show {
+      from {
+        opacity: 0;
+        transform: scale(0.1);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Image Animation Example</h1>
+  <img src="./img/1.png" alt="Image 1" width="300">
+  <img src="./img/2.png" alt="Image 2" width="300">
+  <img src="./img/3.png" alt="Image 3" width="300">
+  <img src="./img/4.png" alt="Image 4" width="300">
+  <img src="./img/1.png" alt="Image 1" width="300">
+  <img src="./img/2.png" alt="Image 2" width="300">
+  <img src="./img/3.png" alt="Image 3" width="300">
+  <img src="./img/4.png" alt="Image 4" width="300">
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const images = document.querySelectorAll('img');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animated');
+          } else {
+            entry.target.classList.remove('animated');
+          }
+        });
+      }, {
+        threshold: [0.25, 0.75]
+      });
+
+      images.forEach(image => {
+        observer.observe(image);
+      });
+    });
+  </script>
+</body>
+
+</html>
